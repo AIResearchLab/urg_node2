@@ -74,7 +74,7 @@ The urg_libray C API is licensed under the `Simplified BSD License`.
 ```bash
 mkdir -p workspace/src
 cd workspace/src
-git clone --recursive https://github.com/Hokuyo-aut/urg_node2.git
+git clone --recursive https://github.com/AIResearchLab/urg_node2.git
 ```
 
 2. Installing Related Packages
