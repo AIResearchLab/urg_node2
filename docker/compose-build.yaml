@@ -1,0 +1,14 @@
+services:
+  astra_legacy:
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - LAUNCH_FILENAME=urg_node2_serial.launch.py
+      - AUTO_START=true
+      - NODE_NAME=urg_node2
+      - SCAN_TOPIC_NAME=scan
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    volumes:
+      - /dev:/dev

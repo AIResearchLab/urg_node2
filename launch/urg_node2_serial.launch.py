@@ -29,18 +29,11 @@ from lifecycle_msgs.msg import Transition
 
 def generate_launch_description():
 
-    # パラメータファイルのパス設定
-    config_file_path = os.path.join(
-        get_package_share_directory('urg_node2'),
-        'config',
-        'params_serial.yaml'
-    )
+    config_file_path = os.path.join(get_package_share_directory('urg_node2'), 'config', 'params_serial.yaml')
 
-    # パラメータファイルのロード
     with open(config_file_path, 'r') as file:
         config_params = yaml.safe_load(file)['urg_node2']['ros__parameters']
 
-    # urg_node2をライフサイクルノードとして起動
     lifecycle_node = LifecycleNode(
         package='urg_node2',
         executable='urg_node2_node',
@@ -51,7 +44,6 @@ def generate_launch_description():
         output='screen',
     )
 
-    # Unconfigure状態からInactive状態への遷移（auto_startがtrueのとき実施）
     urg_node2_node_configure_event_handler = RegisterEventHandler(
         event_handler=OnProcessStart(
             target_action=lifecycle_node,
@@ -67,7 +59,6 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('auto_start')),
     )
 
-    # Inactive状態からActive状態への遷移（auto_startがtrueのとき実施）
     urg_node2_node_activate_event_handler = RegisterEventHandler(
         event_handler=OnStateTransition(
             target_lifecycle_node=lifecycle_node,
@@ -85,10 +76,6 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('auto_start')),
     )
 
-    # パラメータについて
-    # auto_start      : 起動時自動でActive状態まで遷移 (default)true
-    # node_name       : ノード名 (default)"urg_node2"
-    # scan_topic_name : トピック名 (default)"scan" *マルチエコー非対応*
     return LaunchDescription([
         DeclareLaunchArgument('auto_start', default_value='true'),
         DeclareLaunchArgument('node_name', default_value='urg_node2'),
