@@ -1,5 +1,5 @@
 services:
-  astra_legacy:
+  hakuyo:
     build:
       dockerfile: Dockerfile
     environment:

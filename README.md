@@ -124,3 +124,23 @@ colcon build --symlink-install
 ```bash
 ros2 run tf2_ros static_transform_publisher 0 0 0 0.0 0.0 0.0 map laser
 ```
+
+## Usage with Docker
+
+Clone this reposiotory
+
+```bash
+git clone https://github.com/AIResearchLab/urg_node2.git && cd urg_node2/docker
+```
+
+Pull the Docker image and start compose (No need to run `docker compose build`)
+```bash
+docker compose pull
+docker compose up
+```
+
+To clean the system,
+```bash
+docker compose down
+docker volume rm docker_hakuyo
+```

@@ -1,5 +1,5 @@
 services:
-  navigation:
+  hakuyo:
     image: ghcr.io/airesearchlab/hakuyo-ros:humble
     environment:
       - LAUNCH_FILENAME=urg_node2_serial.launch.py
