@@ -101,7 +101,7 @@ colcon build --symlink-install
 2. Set the connection destination (parameters). Edit `config/params_ether.yaml` (for Ethernet connections) or `config/params_serial.yaml` (for USB connections).
   
 3. Execute one of the following commands to automatically transition to the Active state and begin distribution of scan data.
-   ```
+   ```bash
    # for ethernet connected LiDAR
    ros2 launch urg_node2 urg_node2_ether.launch.py
 
@@ -118,3 +118,9 @@ colcon build --symlink-install
    ```
 
    > In `urg_node2.launch.py`, urg_node2 is launched as a standalone lifecycle node (not as a component). This is because there is no lifecycle control interface in launch when launched as a component and lifecycle node (not implemented in ROS2 at this time).
+
+4. LaserScan messages are published with the `frame_id` parameter (default `laser`). If visualizing laser scan data with Rviz2, run the following command in a new terminal to startup a temporary static_transform_publisher
+
+```bash
+ros2 run tf2_ros static_transform_publisher 0 0 0 0.0 0.0 0.0 map laser
+```
